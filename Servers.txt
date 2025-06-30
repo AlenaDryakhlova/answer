@@ -7,3 +7,22 @@
 •  Zabbix: (zabbix.com) - Еще один популярный инструмент мониторинга.
 •  Grafana: (grafana.com) - Инструмент для визуализации данных мониторинга. Можно использовать с Prometheus, Zabbix и другими системами мониторинга.
 3. Для защиты можно настроить просто ssh
+
+Установка сервера и мониторинга (если задание с сервером):
+sudo apt update
+sudo apt install -y cockpit
+sudo systemctl enable --now cockpit.socket
+ip a - посмотреть айпи
+Откройте Cockpit в браузере
+В адресной строке введите:
+https://<IP_сервера>:9090
+4. Если подключение не работает
+Проверьте, запущен ли Cockpit:
+sudo systemctl status cockpit.socket
+Должно быть active (running). Если нет — перезапустите:
+sudo systemctl restart cockpit.socket
+Откройте порт 9090 в брандмауэре:
+sudo ufw allow 9090/tcp
+Проверьте, что сервер доступен с вашего компьютера:
+ping 192.168.1.100  # Подставьте ваш IP
+Если пинг не проходит — проверьте сетевые настройки VirtualBox (режим "Сетевой мост" или "NAT").
